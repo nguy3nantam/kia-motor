@@ -239,14 +239,22 @@ export const Tag = (p) => (
 )
 
 export const Zalo = ({ size = 20, ...props }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" {...props}>
+  <Icon {...props} width={size} height={size}>
     <path
-      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
       d="M12 2.6C6.2 2.6 1.6 6.5 1.6 11.3c0 2.7 1.5 5.1 3.9 6.7-.1 1-.6 2.4-1.6 3.4 1.9-.3 3.4-1 4.4-1.7.9.2 2 .4 3.1.4 5.8 0 10.4-3.9 10.4-8.8S17.8 2.6 12 2.6Z"
     />
     <path
-      fill="#fff"
-      d="M7.1 14.6V8.9h1.2v4.7H11v1h-3.9Zm4.6 0V8.9h1.1v5.7h-1.1Zm2.6 0V8.9h1.1l2.3 3.5V8.9h1.1v5.7h-1.1l-2.3-3.5v3.5h-1.1Z"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+      d="M7.1 14.6V8.9h1.2v4.7H11v1h-3.9M11.7 14.6V8.9h1.1v5.7h-1.1M14.3 14.6V8.9h1.1l2.3 3.5V8.9h1.1v5.7h-1.1l-2.3-3.5v3.5h-1.1"
     />
-  </svg>
+  </Icon>
 )

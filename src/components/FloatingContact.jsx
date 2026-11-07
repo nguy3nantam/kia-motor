@@ -24,8 +24,8 @@ export default function FloatingContact() {
               onClick={close}
               className="flex items-center gap-3 border-b border-line px-4 py-3 text-sm font-semibold text-ink-800 transition hover:bg-canvas"
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-none bg-kia-600 text-white">
-                <Phone size={16} />
+              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
+                <Phone size={18} />
               </span>
               <span className="min-w-0">
                 <span className="block text-[11px] font-semibold uppercase tracking-wide text-ink-400">
@@ -41,7 +41,7 @@ export default function FloatingContact() {
               onClick={close}
               className="flex items-center gap-3 border-b border-line px-4 py-3 text-sm font-semibold text-ink-800 transition hover:bg-canvas"
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-none bg-[#0068ff] text-white">
+              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
                 <Zalo size={18} />
               </span>
               Chat Zalo
@@ -54,8 +54,8 @@ export default function FloatingContact() {
               }}
               className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-semibold text-ink-800 transition hover:bg-canvas"
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-none bg-ink-900 text-white">
-                <Chat size={16} />
+              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
+                <Chat size={18} />
               </span>
               Nhận tư vấn ngay
             </button>
