@@ -159,7 +159,7 @@ export default function CostEstimator() {
               alt="Kia"
               className="h-7 w-auto object-contain"
             />
-            <span className="text-lg font-extrabold text-ink-900">KIA Phú Mỹ Hưng</span>
+            <span className="text-lg font-extrabold text-ink-900 uppercase">KIA PHÚ MỸ HƯNG</span>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
