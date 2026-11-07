@@ -18,20 +18,15 @@ export default function FloatingContact() {
         style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
       >
         {open && (
-          <div className="animate-fade-up w-60 overflow-hidden rounded-none border border-line bg-white shadow-[var(--shadow-lift)]">
+          <div className="animate-fade-up overflow-hidden rounded-none border border-line bg-white shadow-[var(--shadow-lift)]">
             <a
               href={site.hotlineHref}
               onClick={close}
-              className="flex items-center gap-3 border-b border-line px-4 py-3 text-sm font-semibold text-ink-800 transition hover:bg-canvas"
+              className="flex items-center justify-center gap-3 border-b border-line px-4 py-3 transition hover:bg-canvas"
+              aria-label={`Gọi hotline ${site.hotline}`}
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
-                <Phone size={18} />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[11px] font-semibold uppercase tracking-wide text-ink-400">
-                  Gọi hotline
-                </span>
-                <span className="block truncate">{site.hotline}</span>
+              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
+                <Phone size={20} />
               </span>
             </a>
             <a
@@ -39,12 +34,12 @@ export default function FloatingContact() {
               target="_blank"
               rel="noreferrer"
               onClick={close}
-              className="flex items-center gap-3 border-b border-line px-4 py-3 text-sm font-semibold text-ink-800 transition hover:bg-canvas"
+              className="flex items-center justify-center gap-3 border-b border-line px-4 py-3 transition hover:bg-canvas"
+              aria-label="Chat Zalo"
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
-                <Zalo size={18} />
+              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
+                <Zalo size={20} />
               </span>
-              Chat Zalo
             </a>
             <button
               type="button"
@@ -52,12 +47,12 @@ export default function FloatingContact() {
                 close()
                 openLead(null, 'tu-van')
               }}
-              className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-semibold text-ink-800 transition hover:bg-canvas"
+              className="flex items-center justify-center gap-3 w-full px-4 py-3 transition hover:bg-canvas"
+              aria-label="Nhận tư vấn ngay"
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center text-ink-900">
-                <Chat size={18} />
+              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
+                <Chat size={20} />
               </span>
-              Nhận tư vấn ngay
             </button>
           </div>
         )}
