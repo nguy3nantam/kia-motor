@@ -25,7 +25,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label={`Gọi hotline ${site.hotline}`}
             >
-              <Phone size={24} />
+              <Phone size={28} />
             </a>
             <a
               href={site.zaloHref}
@@ -35,7 +35,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Chat Zalo"
             >
-              <Zalo size={24} />
+              <Zalo size={28} />
             </a>
             <button
               type="button"
@@ -46,7 +46,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Nhận tư vấn ngay"
             >
-              <Messenger size={24} />
+              <Messenger size={28} />
             </button>
           </div>
         )}
