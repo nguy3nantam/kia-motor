@@ -36,6 +36,7 @@ export default function UserManager({ currentUser }) {
           : original.passwordHash,
       }
       delete nextUser.password
+      delete nextUser.confirm
       setUsers(users.map((user) => user.id === originalId ? nextUser : user))
     } else {
       const nextUser = {

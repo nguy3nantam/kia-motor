@@ -40,8 +40,12 @@ export default function SettingsManager({ currentUser }) {
   const save = (event) => {
     event.preventDefault()
     const digits = String(form.hotline || '').replace(/\D/g, '')
-    setSite({ ...form, hotlineHref: digits ? `tel:${digits}` : '' })
-    setMessage('Đã lưu thông tin showroom.')
+    const saved = setSite({ ...form, hotlineHref: digits ? `tel:${digits}` : '' })
+    if (saved) {
+      setMessage('Đã lưu thông tin showroom.')
+    } else {
+      setMessage('Không thể lưu thông tin. Vui lòng kiểm tra dung lượng hoặc quyền lưu trữ trình duyệt.')
+    }
   }
 
   const reset = () => {

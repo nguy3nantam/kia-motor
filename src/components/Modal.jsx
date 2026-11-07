@@ -68,7 +68,7 @@ export default function Modal({
   return (
     <div
       ref={dialogRef}
-      className="fixed inset-0 z-[100] flex items-end justify-center overflow-y-auto bg-ink-950/50 p-0 backdrop-blur-sm sm:items-center sm:p-6 animate-fade-in"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-ink-950/50 p-0 backdrop-blur-sm sm:p-6 animate-fade-in"
       onMouseDown={(e) => e.target === e.currentTarget && onClose?.()}
       role="dialog"
       aria-modal="true"
