@@ -61,7 +61,7 @@ export default function CarCatalog() {
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="rounded-none border border-line-strong bg-white px-3.5 py-2 text-sm font-semibold text-ink-800 focus:border-ink-900 focus:outline-none"
+                className="min-h-11 rounded-none border border-line-strong bg-white px-3.5 py-2 text-sm font-semibold text-ink-800 focus:border-ink-900 focus:outline-none"
               >
                 <option value="default">Nổi bật</option>
                 <option value="price-asc">Giá thấp → cao</option>

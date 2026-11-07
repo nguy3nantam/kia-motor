@@ -66,8 +66,14 @@ export default function Site() {
   return (
     <>
       <SiteMetadata />
+      <a
+        href="#main-content"
+        className="fixed left-4 top-4 z-[200] -translate-y-24 bg-ink-900 px-4 py-3 text-sm font-bold text-white transition-transform focus:translate-y-0"
+      >
+        Bỏ qua đến nội dung chính
+      </a>
       <Header />
-      <main>
+      <main id="main-content" tabIndex="-1" className="focus:outline-none">
         <Hero />
         <QuickActions />
         <CarCatalog />

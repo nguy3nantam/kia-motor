@@ -19,7 +19,7 @@ export function Services() {
             <span className="grid h-11 w-11 place-items-center text-ink-800"><Icon size={24} /></span>
             <h3 className="mt-5 text-base">{title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-ink-500">{desc}</p>
-            <a href="#lien-he" className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-kia-600 hover:underline">Tìm hiểu thêm <ArrowRight size={14} /></a>
+            <a href="#lien-he" className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-kia-600 hover:underline">Tìm hiểu thêm <ArrowRight size={14} /></a>
           </article>
         ))}
       </div>

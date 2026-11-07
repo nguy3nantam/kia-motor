@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useApp } from '../context/AppContext'
 import { cx } from '../lib/format'
 import {
@@ -14,7 +14,7 @@ import {
 function Logo({ dark = false }) {
   const { site } = useApp()
   return (
-    <a href="#top" className="flex items-center" aria-label={site.name}>
+    <a href="#top" className="flex min-h-11 items-center" aria-label={site.name}>
       <span className="flex h-9 w-[76px] shrink-0 items-center justify-center">
         <img
           src={dark
@@ -35,6 +35,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeId, setActiveId] = useState('')
+  const menuPanelRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -43,25 +44,32 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Theo dõi section đang ở giữa màn hình để đánh dấu trong menu
+  // Theo dõi section đã đi qua vùng đầu màn hình để đánh dấu trong menu.
   useEffect(() => {
     const ids = site.nav.map((n) => n.href.slice(1))
-    const els = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean)
-    if (!els.length) return
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-        if (visible[0]) setActiveId(visible[0].target.id)
-      },
-      { rootMargin: '-35% 0px -50% 0px', threshold: [0, 0.2, 0.5, 1] },
-    )
-    els.forEach((el) => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
+    let frame = 0
+    const updateActive = () => {
+      frame = 0
+      let current = ''
+      const threshold = Math.min(220, window.innerHeight * 0.35)
+      for (const id of ids) {
+        const element = document.getElementById(id)
+        if (element && element.getBoundingClientRect().top <= threshold) current = id
+      }
+      setActiveId(current)
+    }
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActive)
+    }
+    updateActive()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [site.nav])
 
   // Khi mở menu: tính lại mục đang xem (phòng khi chưa có scroll nào xảy ra)
   useEffect(() => {
@@ -77,9 +85,38 @@ export default function Header() {
   }, [open])
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return undefined
+    const previousFocus = document.activeElement
+    const panel = menuPanelRef.current
+    const focusable = () => Array.from(panel?.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ) || []).filter((element) => element.getClientRects().length > 0)
+    panel?.querySelector('[aria-label="Đóng menu"]')?.focus()
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setOpen(false)
+      } else if (event.key === 'Tab') {
+        const elements = focusable()
+        if (!elements.length) return
+        const first = elements[0]
+        const last = elements[elements.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     return () => {
-      document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+      if (previousFocus?.isConnected) previousFocus.focus()
     }
   }, [open])
 
@@ -97,22 +134,31 @@ export default function Header() {
         <div className="container-page flex h-16 items-center justify-between gap-4">
           <Logo />
 
-          <nav className="hidden items-center gap-1 lg:flex">
-            {site.nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="rounded-none px-3.5 py-2 text-sm font-semibold text-ink-700 transition hover:bg-canvas hover:text-ink-900"
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav aria-label="Điều hướng chính" className="hidden items-center gap-1 lg:flex">
+            {site.nav.map((item) => {
+              const isActive = activeId === item.href.slice(1)
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={cx(
+                    'inline-flex min-h-11 items-center rounded-none px-3.5 py-2 text-sm font-semibold transition',
+                    isActive
+                      ? 'bg-canvas text-ink-900'
+                      : 'text-ink-700 hover:bg-canvas hover:text-ink-900',
+                  )}
+                >
+                  {item.label}
+                </a>
+              )
+            })}
           </nav>
 
           <div className="flex items-center gap-2">
             <a
               href={site.hotlineHref}
-              className="hidden items-center gap-2 rounded-none border border-line-strong px-3.5 py-2 text-sm font-semibold text-ink-800 transition hover:border-ink-900 md:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-none border border-line-strong px-3.5 py-2 text-sm font-semibold text-ink-800 transition hover:border-ink-900 md:inline-flex"
             >
               <Phone size={16} />
               {site.hotline}
@@ -128,8 +174,10 @@ export default function Header() {
             <button
               type="button"
               aria-label="Mở menu"
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
               onClick={() => setOpen(true)}
-              className="grid h-10 w-10 place-items-center rounded-none text-ink-900 transition hover:bg-canvas lg:hidden"
+              className="grid h-11 w-11 place-items-center rounded-none text-ink-900 transition hover:bg-canvas lg:hidden"
             >
               <Menu size={22} />
             </button>
@@ -144,7 +192,14 @@ export default function Header() {
             className="absolute inset-0 bg-ink-950/50 backdrop-blur-sm animate-fade-in"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col bg-white shadow-[var(--shadow-lift)] animate-slide-in-left">
+          <div
+            id="mobile-navigation"
+            ref={menuPanelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu điều hướng"
+            className="absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col bg-white shadow-[var(--shadow-lift)] animate-slide-in-left"
+          >
             <div className="flex items-center justify-between border-b border-line px-5 py-4">
               <div className="flex min-w-0 items-center gap-2">
                 <Logo />

@@ -7,6 +7,7 @@ import CarImage from './CarImage'
 export default function Hero() {
   const { openLead, openDetail, cars, slides: homeSlides } = useApp()
   const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   const slides = useMemo(() => {
     const configured = homeSlides.filter((slide) => slide.active !== false).map((slide) => ({
@@ -28,10 +29,14 @@ export default function Hero() {
   }, [cars, homeSlides])
 
   useEffect(() => {
-    if (slides.length <= 1) return undefined
+    if (
+      slides.length <= 1 ||
+      paused ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) return undefined
     const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6500)
     return () => clearInterval(t)
-  }, [slides.length])
+  }, [slides.length, paused])
 
   useEffect(() => {
     if (index >= slides.length) setIndex(0)
@@ -46,7 +51,17 @@ export default function Hero() {
   if (!car) return null
 
   return (
-    <section id="top" className="relative overflow-hidden bg-canvas">
+    <section
+      id="top"
+      aria-label="Xe Kia nổi bật"
+      className="relative overflow-hidden bg-canvas"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false)
+      }}
+    >
       <div className="container-page">
         <div className="relative">
           <div className="grid items-center gap-2 pb-4 pt-5 sm:gap-6 sm:py-10 lg:min-h-[480px] lg:grid-cols-[.8fr_1.2fr] lg:py-12">
@@ -120,7 +135,7 @@ export default function Hero() {
                   aria-label={`Chuyển tới ${s.title}`}
                   onClick={() => setIndex(i)}
                   aria-current={i === index ? 'true' : undefined}
-                  className="grid h-10 w-8 place-items-center rounded-none"
+                  className="grid h-11 w-11 place-items-center rounded-none"
                 >
                   <span
                     className={cx(
@@ -138,7 +153,7 @@ export default function Hero() {
                 type="button"
                 aria-label="Trước"
                 onClick={() => go(-1)}
-                className="grid h-10 w-10 place-items-center rounded-none border border-line-strong bg-white/70 text-ink-700 backdrop-blur transition hover:border-ink-900 hover:text-ink-900"
+                className="grid h-11 w-11 place-items-center rounded-none border border-line-strong bg-white/70 text-ink-700 backdrop-blur transition hover:border-ink-900 hover:text-ink-900"
               >
                 <ChevronLeft size={18} />
               </button>
@@ -146,7 +161,7 @@ export default function Hero() {
                 type="button"
                 aria-label="Sau"
                 onClick={() => go(1)}
-                className="grid h-10 w-10 place-items-center rounded-none border border-line-strong bg-white/70 text-ink-700 backdrop-blur transition hover:border-ink-900 hover:text-ink-900"
+                className="grid h-11 w-11 place-items-center rounded-none border border-line-strong bg-white/70 text-ink-700 backdrop-blur transition hover:border-ink-900 hover:text-ink-900"
               >
                 <ChevronRight size={18} />
               </button>

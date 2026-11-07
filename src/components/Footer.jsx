@@ -18,21 +18,21 @@ export default function Footer() {
           <p className="mt-2 max-w-md text-sm leading-relaxed text-white/55">{site.about}</p>
           <div className="mt-5 flex gap-2">
             {[[site.social.facebook, Facebook, 'Facebook'], [site.social.youtube, YouTube, 'YouTube'], [site.social.instagram, Instagram, 'Instagram']].map(([href, Icon, label]) => (
-              <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-9 w-9 place-items-center rounded-none bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"><Icon size={18} /></a>
+              <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-11 w-11 place-items-center rounded-none bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"><Icon size={18} /></a>
             ))}
           </div>
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-wide text-white">Liên kết nhanh</h3>
-          <nav className="mt-4 grid gap-3">
-            {site.nav.slice(0, 5).map((item) => <a key={item.href} href={item.href} className="text-sm text-white/55 hover:text-white">{item.label}</a>)}
+          <nav aria-label="Liên kết cuối trang" className="mt-2 grid">
+            {site.nav.slice(0, 5).map((item) => <a key={item.href} href={item.href} className="inline-flex min-h-11 items-center text-sm text-white/55 hover:text-white">{item.label}</a>)}
           </nav>
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-wide text-white">Liên hệ showroom</h3>
-          <div className="mt-4 space-y-3 text-sm text-white/55">
-            <a href={site.hotlineHref} className="flex gap-2.5 hover:text-white"><Phone size={17} className="mt-0.5 shrink-0" /> {site.hotline}</a>
-            <a href={`mailto:${site.email}`} className="flex gap-2.5 hover:text-white"><Mail size={17} className="mt-0.5 shrink-0" /> {site.email}</a>
+          <div className="mt-2 text-sm text-white/55">
+            <a href={site.hotlineHref} className="flex min-h-11 items-center gap-2.5 hover:text-white"><Phone size={17} className="shrink-0" /> {site.hotline}</a>
+            <a href={`mailto:${site.email}`} className="flex min-h-11 items-center gap-2.5 hover:text-white"><Mail size={17} className="shrink-0" /> {site.email}</a>
             <p className="flex gap-2.5"><MapPin size={17} className="mt-0.5 shrink-0" /> {site.address}</p>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function Footer() {
           <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
           <span className="flex items-center gap-4">
             <span>Website đại lý mẫu — dữ liệu giá và ưu đãi mang tính tham khảo.</span>
-            <a href="/quan-tri" className="hover:text-white">Quản trị</a>
+            <a href="/quan-tri" className="inline-flex min-h-11 items-center hover:text-white">Quản trị</a>
           </span>
         </div>
       </div>
