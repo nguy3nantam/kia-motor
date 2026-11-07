@@ -153,6 +153,14 @@ export default function CostEstimator() {
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.05fr]">
         {/* Bộ chọn */}
         <div className="card p-6 sm:p-7">
+          <div className="flex items-center gap-3 mb-6">
+            <img
+              src="/images/brand/kia-logo-dark.webp"
+              alt="Kia"
+              className="h-7 w-auto object-contain"
+            />
+            <span className="text-lg font-extrabold text-ink-900">KIA Phú Mỹ Hưng</span>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="label" htmlFor="ce-car">
