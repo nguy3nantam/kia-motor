@@ -1,0 +1,23 @@
+{
+  "name": "kia-phu-my-hung",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website showroom Kia Phú Mỹ Hưng - tối giản, tập trung bán hàng online",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "test": "node --test",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.4"
+  }
+}
