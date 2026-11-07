@@ -18,28 +18,24 @@ export default function FloatingContact() {
         style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
       >
         {open && (
-          <div className="animate-fade-up overflow-hidden rounded-none border border-line bg-white shadow-[var(--shadow-lift)]">
+          <div className="animate-fade-up flex flex-col items-end gap-3">
             <a
               href={site.hotlineHref}
               onClick={close}
-              className="flex items-center justify-center gap-3 border-b border-line px-4 py-3 transition hover:bg-canvas"
+              className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label={`Gọi hotline ${site.hotline}`}
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
-                <Phone size={20} />
-              </span>
+              <Phone size={20} />
             </a>
             <a
               href={site.zaloHref}
               target="_blank"
               rel="noreferrer"
               onClick={close}
-              className="flex items-center justify-center gap-3 border-b border-line px-4 py-3 transition hover:bg-canvas"
+              className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Chat Zalo"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
-                <Zalo size={20} />
-              </span>
+              <Zalo size={20} />
             </a>
             <button
               type="button"
@@ -47,12 +43,10 @@ export default function FloatingContact() {
                 close()
                 openLead(null, 'tu-van')
               }}
-              className="flex items-center justify-center gap-3 w-full px-4 py-3 transition hover:bg-canvas"
+              className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Nhận tư vấn ngay"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center text-ink-900">
-                <Chat size={20} />
-              </span>
+              <Chat size={20} />
             </button>
           </div>
         )}
