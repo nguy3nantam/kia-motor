@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
-import { Chat, Close, Phone, Zalo } from './Icons'
+import { Close, Messenger, Phone, Zalo } from './Icons'
 
 /** Nút sticky liên hệ duy nhất — logo KIA, bấm xổ menu 3 kênh: Gọi / Zalo / Nhận tư vấn */
 export default function FloatingContact() {
@@ -25,7 +25,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label={`Gọi hotline ${site.hotline}`}
             >
-              <Phone size={20} />
+              <Phone size={24} />
             </a>
             <a
               href={site.zaloHref}
@@ -35,7 +35,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Chat Zalo"
             >
-              <Zalo size={20} />
+              <Zalo size={24} />
             </a>
             <button
               type="button"
@@ -46,7 +46,7 @@ export default function FloatingContact() {
               className="grid h-12 w-12 place-items-center rounded-lg bg-ink-900 text-white shadow-[0_10px_24px_-8px_rgba(5,20,31,0.55)] transition hover:-translate-y-0.5"
               aria-label="Nhận tư vấn ngay"
             >
-              <Chat size={20} />
+              <Messenger size={24} />
             </button>
           </div>
         )}

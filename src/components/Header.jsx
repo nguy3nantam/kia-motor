@@ -120,7 +120,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => openLead(null, 'lai-thu')}
-              className="btn-primary hidden sm:inline-flex"
+              className="btn-primary hidden shadow-none sm:inline-flex"
             >
               <Calendar size={16} />
               Đăng ký lái thử
